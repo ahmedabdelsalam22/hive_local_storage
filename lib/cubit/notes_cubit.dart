@@ -11,8 +11,9 @@ class AddNoteCubit extends Cubit<AddNoteState> {
   static AddNoteCubit get(context) => BlocProvider.of(context);
 
   addNote(NoteModel noteModel) async {
+    emit(AddNoteLoading());
     try {
-      var notesBox = Hive.box(AppConsts.kNotesBox);
+      var notesBox = Hive.box<NoteModel>(AppConsts.kNotesBox);
       await notesBox.add(noteModel);
       emit(AddNoteSuccess());
     } catch (e) {
