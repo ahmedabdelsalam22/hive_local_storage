@@ -4,13 +4,16 @@ import 'package:todo_hive/shared/app_theme.dart';
 import 'package:todo_hive/shared/constance.dart';
 import 'package:todo_hive/view/notes_view.dart';
 
+import 'models/note_model.dart';
+
 void main() async {
   await Hive.initFlutter();
 
   await Hive.openBox(AppConsts.kNotesBox);
-
+  Hive.registerAdapter(NoteModelAdapter());
   runApp(const MyApp());
 }
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
