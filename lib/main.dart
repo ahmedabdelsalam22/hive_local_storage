@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:todo_hive/shared/app_theme.dart';
+import 'package:todo_hive/shared/constance.dart';
 import 'package:todo_hive/view/notes_view.dart';
 
-void main() {
+void main() async {
+  await Hive.initFlutter();
+
+  await Hive.openBox(AppConsts.kNotesBox);
+
   runApp(const MyApp());
 }
 
