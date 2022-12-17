@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:todo_hive/cubit/notes_cubit.dart';
 import 'package:todo_hive/models/note_model.dart';
 
@@ -12,22 +11,23 @@ class AddNoteBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: BlocProvider(
-        create: (context) => AddNoteCubit(),
-        child: BlocConsumer<AddNoteCubit, AddNoteState>(
-          listener: (context, state) {
-            if (state is AddNoteError) debugPrint("failed${state.msg}");
-            if (state is AddNoteSuccess) Navigator.pop(context);
-          },
-          builder: (context, state) {
-            return ModalProgressHUD(
-              inAsyncCall: state is AddNoteLoading ? true : false,
-              child: const AddNoteForm(),
-            );
-          },
-        ),
+    return BlocProvider(
+      create: (context) => AddNoteCubit(),
+      child: BlocConsumer<AddNoteCubit, AddNoteState>(
+        listener: (context, state) {
+          if (state is AddNoteError) debugPrint("failed${state.msg}");
+          if (state is AddNoteSuccess) Navigator.pop(context);
+        },
+        builder: (context, state) {
+          return AbsorbPointer(
+            // make screen disabled when is loading ..
+            absorbing: state is AddNoteLoading ? true : false,
+            child: const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              child: AddNoteForm(),
+            ),
+          );
+        },
       ),
     );
   }
@@ -75,21 +75,26 @@ class _AddNoteFormState extends State<AddNoteForm> {
             const SizedBox(
               height: 32,
             ),
-            CustomButton(
-              onTap: () {
-                if (formKey.currentState!.validate()) {
-                  formKey.currentState!.save();
-                  var noteModel = NoteModel(
-                    title: title!,
-                    subTitle: subTitle!,
-                    date: DateTime.now().toString(),
-                    color: const Color(0xffFFCC80).value,
-                  );
-                  cubit.addNote(noteModel);
-                } else {
-                  autoValidateMode = AutovalidateMode.always;
-                  setState(() {});
-                }
+            BlocBuilder<AddNoteCubit, AddNoteState>(
+              builder: (context, state) {
+                return CustomButton(
+                  isLoading: state is AddNoteLoading ? true : false,
+                  onTap: () {
+                    if (formKey.currentState!.validate()) {
+                      formKey.currentState!.save();
+                      var noteModel = NoteModel(
+                        title: title!,
+                        subTitle: subTitle!,
+                        date: DateTime.now().toString(),
+                        color: const Color(0xffFFCC80).value,
+                      );
+                      cubit.addNote(noteModel);
+                    } else {
+                      autoValidateMode = AutovalidateMode.always;
+                      setState(() {});
+                    }
+                  },
+                );
               },
             ),
             const SizedBox(
