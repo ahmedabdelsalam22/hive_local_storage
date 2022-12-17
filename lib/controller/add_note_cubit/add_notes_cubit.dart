@@ -3,7 +3,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:todo_hive/models/note_model.dart';
 import 'package:todo_hive/shared/constance.dart';
 
-part 'notes_state.dart';
+part 'add_notes_state.dart';
 
 class AddNoteCubit extends Cubit<AddNoteState> {
   AddNoteCubit() : super(AddNoteInitial());

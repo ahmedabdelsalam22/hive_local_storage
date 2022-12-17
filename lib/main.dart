@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:todo_hive/cubit/bloc_observer.dart';
 import 'package:todo_hive/shared/app_theme.dart';
 import 'package:todo_hive/shared/constance.dart';
 import 'package:todo_hive/view/notes_view.dart';
 
+import 'controller/add_note_cubit/bloc_observer.dart';
 import 'models/note_model.dart';
 
 void main() async {
