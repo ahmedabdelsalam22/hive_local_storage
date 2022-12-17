@@ -12,7 +12,7 @@ class NotesView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: BlocProvider(
-        create: (context) => NoteCubit(),
+        create: (context) => NoteCubit()..fetchAllNotes(),
         child: Scaffold(
           body: const NotesViewBody(),
           floatingActionButton: FloatingActionButton(
