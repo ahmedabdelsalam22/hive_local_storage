@@ -11,10 +11,11 @@ class NoteCubit extends Cubit<NoteState> {
 
   static NoteCubit get(context) => BlocProvider.of(context);
 
+  List<NoteModel>? notes;
   fetchAllNotes() {
     var notesBox = Hive.box<NoteModel>(AppConsts.kNotesBox);
 
-    List<NoteModel> notes = notesBox.values.toList();
-    emit(NoteSuccess(notes));
+    notes = notesBox.values.toList();
+    emit(NoteSuccess());
   }
 }
