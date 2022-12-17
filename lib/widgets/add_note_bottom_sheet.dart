@@ -22,9 +22,12 @@ class AddNoteBottomSheet extends StatelessWidget {
           return AbsorbPointer(
             // make screen disabled when is loading ..
             absorbing: state is AddNoteLoading ? true : false,
-            child: const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.0),
-              child: AddNoteForm(),
+            child: Padding(
+              padding: EdgeInsets.only(
+                  left: 16,
+                  right: 16,
+                  bottom: MediaQuery.of(context).viewInsets.bottom),
+              child: const AddNoteForm(),
             ),
           );
         },
