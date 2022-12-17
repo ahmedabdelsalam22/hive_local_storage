@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:todo_hive/models/note_model.dart';
 import 'package:todo_hive/view/edit_note_view.dart';
 
 class NoteItem extends StatelessWidget {
-  const NoteItem({Key? key}) : super(key: key);
+  const NoteItem({Key? key, required this.noteModel}) : super(key: key);
+
+  final NoteModel noteModel;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +23,7 @@ class NoteItem extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
         child: Container(
           decoration: BoxDecoration(
-            color: const Color(0xffFFCC80),
+            color: Color(noteModel.color),
             borderRadius: BorderRadius.circular(16),
           ),
           child: Padding(
@@ -29,21 +32,23 @@ class NoteItem extends StatelessWidget {
               children: [
                 ListTile(
                   textColor: Colors.black,
-                  title: const Text(
-                    'Flutter Tips',
-                    style: TextStyle(fontSize: 23),
+                  title: Text(
+                    noteModel.title,
+                    style: const TextStyle(fontSize: 23),
                   ),
                   subtitle: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      'This is first note body',
+                      noteModel.subTitle,
                       style: TextStyle(color: Colors.black.withOpacity(.4)),
                     ),
                   ),
                   trailing: IconButton(
                     icon: const Icon(FontAwesomeIcons.trash),
                     color: Colors.black,
-                    onPressed: () {},
+                    onPressed: () {
+                      //TODO DELETE NOTE
+                    },
                   ),
                 ),
                 const SizedBox(
@@ -54,7 +59,7 @@ class NoteItem extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      '22 Aug',
+                      noteModel.date,
                       style: TextStyle(color: Colors.black.withOpacity(.4)),
                     ),
                   ),
