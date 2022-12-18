@@ -47,7 +47,8 @@ class NoteItem extends StatelessWidget {
                     icon: const Icon(FontAwesomeIcons.trash),
                     color: Colors.black,
                     onPressed: () {
-                      //TODO DELETE NOTE
+                      /// delete note with hive
+                      noteModel.delete();
                     },
                   ),
                 ),
