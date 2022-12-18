@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:todo_hive/controller/get_note_cubit/note_cubit.dart';
 import 'package:todo_hive/models/note_model.dart';
 import 'package:todo_hive/view/edit_note_view.dart';
 
@@ -49,6 +51,7 @@ class NoteItem extends StatelessWidget {
                     onPressed: () {
                       /// delete note with hive
                       noteModel.delete();
+                      BlocProvider.of<NoteCubit>(context).fetchAllNotes();
                     },
                   ),
                 ),
