@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:todo_hive/models/note_model.dart';
 
 import '../controller/add_note_cubit/add_notes_cubit.dart';
+import '../controller/get_note_cubit/note_cubit.dart';
 import 'custom_button.dart';
 import 'custom_text_field.dart';
 
@@ -17,7 +18,10 @@ class AddNoteBottomSheet extends StatelessWidget {
       child: BlocConsumer<AddNoteCubit, AddNoteState>(
         listener: (context, state) {
           if (state is AddNoteError) debugPrint("failed${state.msg}");
-          if (state is AddNoteSuccess) Navigator.pop(context);
+          if (state is AddNoteSuccess) {
+            //BlocProvider.of<NoteCubit>(context).fetchAllNotes();
+            Navigator.pop(context);
+          }
         },
         builder: (context, state) {
           return AbsorbPointer(
@@ -101,6 +105,8 @@ class _AddNoteFormState extends State<AddNoteForm> {
                       autoValidateMode = AutovalidateMode.always;
                       setState(() {});
                     }
+                    // after add note .. we fetch note to refresh ui in same time
+                    BlocProvider.of<NoteCubit>(context).fetchAllNotes();
                   },
                 );
               },
