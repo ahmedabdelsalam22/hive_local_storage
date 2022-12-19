@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:todo_hive/shared/app_theme.dart';
 import 'package:todo_hive/shared/constance.dart';
-import 'package:todo_hive/view/notes_view.dart';
+import 'package:todo_hive/view/splash_view.dart';
 
 import 'controller/add_note_cubit/bloc_observer.dart';
 import 'controller/get_note_cubit/note_cubit.dart';
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: lightTheme,
-        home: const NotesView(),
+        home: const SplashView(),
       ),
     );
   }
