@@ -8,10 +8,12 @@ class CustomTextField extends StatelessWidget {
     required this.hint,
     this.maxLine = 1,
     this.onSave,
+    this.onChange,
   }) : super(key: key);
 
   final String hint;
   final int maxLine;
+  final ValueChanged<String>? onChange;
   final Function(String?)? onSave;
 
   @override
@@ -20,6 +22,7 @@ class CustomTextField extends StatelessWidget {
       cursorColor: AppConsts.kPrimaryColor,
       maxLines: maxLine,
       onSaved: onSave,
+      onChanged: onChange,
       validator: (value) {
         if (value?.isEmpty ?? true) {
           return "Field is required";
