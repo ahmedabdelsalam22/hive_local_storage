@@ -1,6 +1,6 @@
 # todo_hive
 
-A new Flutter project.
+A new Flutter project that let you to add notes and tasks  
 
 ## Getting Started
 
