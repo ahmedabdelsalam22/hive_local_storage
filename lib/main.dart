@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:todo_hive/shared/app_theme.dart';
@@ -11,6 +12,11 @@ import 'models/note_model.dart';
 
 void main() async {
   await Hive.initFlutter();
+
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: Colors.grey,
+    statusBarIconBrightness: Brightness.dark,
+  ));
 
   Bloc.observer = SimpleBlocObserver();
   Hive.registerAdapter(NoteModelAdapter());
