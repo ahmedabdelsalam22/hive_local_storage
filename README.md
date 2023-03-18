@@ -1,4 +1,3 @@
-Delete README.md
 #TODO 
 
 ##You can download app from here 👇👇
